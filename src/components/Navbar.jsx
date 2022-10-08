@@ -5,7 +5,7 @@ import './navbar.css'
 import {links} from '../data'
 import {GoThreeBars} from 'react-icons/go'
 import {MdOutlineClose} from 'react-icons/md'
-import { useState } from 'react'
+import { useState } from 'react';
 
 
 const Navbar = () => {
@@ -15,7 +15,7 @@ const Navbar = () => {
   return (
     <nav>
         <div className="container nav__container">
-            <Link to='/' className='logo'>
+            <Link to='/' className='logo' onClick={()=>isNavShowing(false)}>
                 <img src={Logo} alt="Nav Logo" />
             </Link>
             <ul className={`nav__links ${isNavShowing ? 'show__nav' : 'hide__nav'}`}>
@@ -23,14 +23,14 @@ const Navbar = () => {
                     links.map(({name, path}, index)=>{
                         return (
                             <li key={index}>
-                                <NavLink to={path} className={({isActive}) => isActive ? 'active-nav' : ''}>{name}</NavLink>
+                                <NavLink to={path} className={({isActive}) => isActive ? 'active-nav' : ''} onClick={()=>setisNavShowing(prev => !prev)}>{name}</NavLink>
                             </li>
                         )
                     })
                 }
             </ul>
               
-            <button className="nav__toggle-btn" onClick={()=>setisNavShowing(!isNavShowing)}>
+            <button className="nav__toggle-btn" onClick={()=>setisNavShowing(prev => !prev)}>
                 {
                     isNavShowing ? <MdOutlineClose/>: <GoThreeBars/>
                 }
